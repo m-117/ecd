@@ -26,7 +26,7 @@ Activate the environment.
 conda activate ECD
 ```
 
-Use the ```environment_render.yml``` file if you wish to render the created sequences as DECA shape images.
+Use the ```environment_render.yml``` file if you wish to render the created sequences as DECA shape images and video files.
 
 ### Files
 1. Follow the instructions in [DECA](https://github.com/YadiraF/DECA) (under the *Prepare data* section) to acquire the 3 files ('generic_model.pkl', 'deca_model.tar', 'FLAME_albedo_from_BFM.npz') and place them under "./DECA/data".
@@ -34,11 +34,11 @@ Use the ```environment_render.yml``` file if you wish to render the created sequ
 
 ## Usage
 
-To use the ECD you have to either prepare text data and DECA Sequences containing a fitting mouth movement or use NED to extract DECA Parameter from in-the-wild videos. 
+To use the ECD you have to either prepare text data and DECA Sequences containing a fitting mouth movement or use NED to extract DECA Parameter from in-the-wild videos. If you just want to check things out you can use the provided example sequence.
 
 The prepared input data can be transformed using the ```manipulate_expression()``` function in ```manipulator.py```
 
-In order to render the manipulated sequences use the alternative conda environment and use ```create_inputs.py```
+In order to render the manipulated sequences create the alternative conda environment and use ```create_inputs.py```
 
 ## Acknowledgements
 I would like to thank the following great repositories that my code borrows from:

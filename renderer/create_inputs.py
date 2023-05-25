@@ -16,6 +16,32 @@ def mkdir(path):
     if not os.path.exists(path):
         os.makedirs(path)
 
+def create_video(dir_path, output_file):
+    # Get list of png files
+    file_list = [f for f in sorted(os.listdir(dir_path)) if f.endswith('.png')]
+    
+    # Sort file list by filename to ensure frames are in order
+    file_list.sort()
+    
+    # Get dimensions of first frame
+    frame = cv2.imread(os.path.join(dir_path, file_list[0]))
+    height, width, channels = frame.shape
+    
+    # Define video writer
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v') 
+    video = cv2.VideoWriter(output_file, fourcc, 30.0, (width, height))
+    
+    # Write frames to video file
+    for file in file_list:
+        frame = cv2.imread(os.path.join(dir_path, file))
+        video.write(frame)
+    
+    # Release video writer
+    video.release()
+    
+    print("Video file created:", output_file)
+
+
 def read_DECA_params(exp_tensor, pose_tensor, device = 'cuda'):
     params = []
     for i in range(exp_tensor.shape[0]):
@@ -157,7 +183,7 @@ def main(tensor_path, pose_path, id, gpu_id, input_path):
         new_filename = padding + filename
         os.rename(os.path.join(shape_path, filename), os.path.join(shape_path, new_filename))
 
-
+    create_video(shape_path, os.path.join(input_path, id, "video.mp4"))
     print('DONE!')
 
 if __name__=='__main__':
