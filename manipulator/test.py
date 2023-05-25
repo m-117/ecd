@@ -53,10 +53,13 @@ def manipulate_single_sequence(deca_path, input_text):
     for i in range(20):
         os.mkdir(os.path.join(deca_path, str(i+1)))
         for emotion in emotions:
-            print(emotion)
             new_exp, new_pose, actor_list, emo_list = manipulate_expressions(deca_tensor, input_text, mult, emotion)
             os.mkdir(os.path.join(deca_path, str(i+1), emotion))    
             torch.save(new_exp, os.path.join(deca_path, str(i+1), emotion, "exp.pt"))
             torch.save(new_pose, os.path.join(deca_path, str(i+1), emotion, "pose.pt"))
         mult += 0.01
 
+if __name__=='__main__':
+    example_path = "/home/marco/ecd/example_sequence/"
+    input_text = "This is a text example. To use the text input, you need to set emotion to None in the manipulate_single_sequence() function."
+    manipulate_single_sequence(example_path, input_text)
